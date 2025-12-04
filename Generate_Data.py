@@ -15,7 +15,7 @@ def create_gene_data(samples=10, genes=100): #Generate synthetic transcriptomic 
     df = pd.DataFrame(data, index=gene_names, columns=sample_names)
 
     # Introduce ~5% missing values to mimic real biological/technical noise
-    # (e.g., dropout, low-coverage regions, measurement errors)
+    # (for example, dropout, low-coverage regions, measurement errors)
     for row in range(genes):
         for col in range(samples):
             # With a 5% chance, replace a value with NaN
