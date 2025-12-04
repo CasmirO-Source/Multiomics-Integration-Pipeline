@@ -12,7 +12,7 @@ This project reflects my interest in biological data analysis and serves as prep
 
 - Demonstrate understanding of multiomics data structures (genes + metabolites)
 - Practice data cleaning and feature selection methods
-- Apply simple statistical strategies to visualize sample-level variation
+- Apply simple statistical strategies to visualise sample-level variation
 - Create reproducible, structured Python code suitable for academic or industry settings
 
 ---
