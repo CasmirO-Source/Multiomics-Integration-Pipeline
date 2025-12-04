@@ -65,14 +65,14 @@ def make_plot(features, groups, save_folder='results'):
 
 # Execution of the full pipeline
 def run():
-    print("Starting analysis...")
+    print("Starting analysis")
     
     gene_file = 'data/transcriptomics_data.csv'
     molecule_file = 'data/metabolomics_data.csv'
     gene_df, molecule_df = load_data(gene_file, molecule_file)
     
     if gene_df is None or molecule_df is None:
-        print("Missing data. Stopping.")
+        print("Missing data so we're not running.")
         return
     
     gene_df = clean_data(gene_df)
@@ -86,7 +86,7 @@ def run():
     groups = group_samples(top_features)
     make_plot(top_features, groups)
 
-    print("Analysis complete!")
+    print("Analysis completeddd")
 
 if __name__ == "__main__":
     run()
