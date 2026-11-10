@@ -1,77 +1,38 @@
-#  Multiomics Data Simulation and Analysis Pipeline
+# Multi-omics Integration Pipeline
 
-This was one of my favourite projects to complete. Although I only completed it utilising transcriptomics and metabolic data, the pipeline could be extended to include more data types to increase its complexity and difficulty. It was quite challenging yet rewarding for me to create and will aid me greatly in my preparation for postgraduate studies
+A small pipeline that generates two biological datasets, cleans them, joins them on shared sample IDs and plots the result. I built it in April 2025, before starting my MSc, to get comfortable with the basic steps of combining data from different sources.
 
-This repository contains a pipeline for simulating, processing, and visualising multiomics datasets (transcriptomics and metabolomics). It is designed as part of a bioinformatics learning portfolio, demonstrating core concepts in data simulation, preprocessing, integration, and visualisation.
+The two datasets are gene activity (transcriptomics) and small-molecule levels (metabolomics) for the same ten samples. The data is synthetic, generated with fixed random seeds so every run gives the same output. About 5% of values are deliberately blanked out to mimic the gaps you get in real lab data.
 
-This project reflects my interest in biological data analysis and serves as preparation for postgraduate study in Bioinformatics.
+## What it does
 
----
+1. **Generate** (`Generate_Data.py`): creates 100 genes and 20 metabolites across 10 samples and writes them to `data/` as CSVs.
+2. **Load and clean** (`Analysis.py`): reads both files, keeps numeric columns only and drops any row with a missing value.
+3. **Join**: finds the samples present in both datasets and stacks them into one table.
+4. **Select**: picks the two features with the most variation across samples.
+5. **Plot**: splits samples into high and low groups on the first feature and saves a scatter plot to `results/sample_groups.png`.
 
-## Project Goals
+Running it end to end, cleaning keeps 57 of 100 genes and 13 of 20 metabolites, giving a combined table of 70 features across 10 samples.
 
-- Demonstrate understanding of multiomics data structures (genes + metabolites)
-- Practice data cleaning and feature selection methods
-- Apply simple statistical strategies to visualise sample-level variation
-- Create reproducible, structured Python code suitable for academic or industry settings
+## What I'd do differently
 
----
+Dropping every row with a missing value is the simplest approach, but here it throws away 43% of the genes. With real data I'd fill gaps instead (for example with the median for that feature) or only drop features above a set threshold of missing values, and I'd log how many rows each step removes so the losses are visible.
 
-##  Overview
+## Running it
 
-The pipeline simulates synthetic omics data to mimic real-world conditions (including missing values), then processes and visualizes the data to identify patterns across samples.
-
-It includes two main Python scripts:
-
-1. 'generated_data.py' – simulates and exports fake transcriptomics and metabolomics datasets
-2. 'analysis.py' – loads, cleans, combines, and visualizes the data using basic statistical methods
-
----
-
-##  Project Structure
-Multi_Omics_Pipeline/
-├── data/ # Auto-generated CSV files (gene & metabolite data)
-├── results/ # Output plot showing how samples group together based on the two most variable features selected from the combined data
-├── git.ignore # Stores my temporary files created by my device
-├── analysis.py # Analyse and visualise the data
-├── generated_data.py # Generate synthetic omics data
-├── requirements.txt # Package dependencies
-└── README.md # Project documentation
-
----
-## Usage Instructions
-
-1. Clone the repository
-git clone https://github.com/CasmirO-Source/Bioinformatics.git
-cd Bioinformatics
-2. Install dependencies
+```bash
+git clone https://github.com/CasmirO-Source/Multiomics-Integration-Pipeline.git
+cd Multiomics-Integration-Pipeline
 pip install -r requirements.txt
-3. Generate the synthetic data
-python scripts/generated_data.py
-4. Run the analysis
-python scripts/analysis.py
+python Generate_Data.py
+python Analysis.py
+```
 
-## Dependencies
+Needs Python 3 with NumPy, pandas and Matplotlib.
 
-numpy
-pandas
-matplotlib
+## What's in the repo
 
-Install them all at once using:
-
-pip install -r requirements.txt
-
-
-## Skills Demonstrated
-
-Data simulation and handling biological noise
-Missing value management
-Sample intersection and omics integration
-Feature variability analysis
-Data visualization using Python
-
-## Academic Relevance
-
-This project was developed as a foundational exercise in multiomics data processing, which is a core skill in modern bioinformatics research. It reflects my interest in applying computational tools to real-world biological data and prepares me for my coursework and research in Bioinformatics.
-
-**Developed**: April 2025 | **Uploaded**: May 2025
+- `Generate_Data.py`: creates the synthetic datasets
+- `Analysis.py`: cleans, joins, selects and plots
+- `data/`: the generated CSVs
+- `results/`: the output plot

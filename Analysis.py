@@ -86,7 +86,7 @@ def run():
     groups = group_samples(top_features)
     make_plot(top_features, groups)
 
-    print("Analysis completeddd")
+    print("Analysis completed")
 
 if __name__ == "__main__":
     run()
